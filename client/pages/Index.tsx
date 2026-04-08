@@ -6,7 +6,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { ContinueWatchingSection } from "@/components/sections/ContinueWatchingSection";
 import { TrendingSection } from "@/components/sections/TrendingSection";
 import { FeaturedSection } from "@/components/sections/FeaturedSection";
-import { CategoriesSection } from "@/components/sections/CategoriesSection";
 import { TopPicksSection } from "@/components/sections/TopPicksSection";
 import { NewReleasesSection } from "@/components/sections/NewReleasesSection";
 import { PopularSection } from "@/components/sections/PopularSection";
@@ -31,7 +30,6 @@ export default function Index() {
       <ContinueWatchingSection />
       <TrendingSection />
       <FeaturedSection />
-      <CategoriesSection />
       <TopPicksSection />
       <NewReleasesSection />
       <PopularSection />

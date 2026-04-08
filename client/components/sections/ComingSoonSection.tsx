@@ -1,40 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Bell, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoCard } from "@/components/VideoCard";
 import { VIDEOS } from "@/lib/videos";
 
 const COMING_SOON = [
-  { id: 1, title: "Saveurs du Monde II",      image: "/COOKING/i37.jpg", video: VIDEOS[37], category: "Cuisine · Voyage",      daysLeft: 12 },
-  { id: 2, title: "Le Grand Chef Saison 2",   image: "/COOKING/i38.jpg", video: VIDEOS[38], category: "Compétition",           daysLeft: 5  },
-  { id: 3, title: "Recettes Secrètes II",     image: "/COOKING/i39.jpg", video: VIDEOS[39], category: "Gastronomie",           daysLeft: 21 },
-  { id: 4, title: "Chef en Ville Saison 2",   image: "/COOKING/i40.jpg", video: VIDEOS[40], category: "Cuisine Urbaine",       daysLeft: 3  },
-  { id: 5, title: "Festin Sauvage II",        image: "/COOKING/i41.jpg", video: VIDEOS[41], category: "Nature & Cuisine",      daysLeft: 8  },
+  { id: 1, title: "Saveurs du Monde II",    image: "/COOKING/i37.jpg", video: VIDEOS[37], category: "Cuisine · Voyage"  },
+  { id: 2, title: "Le Grand Chef Saison 2", image: "/COOKING/i38.jpg", video: VIDEOS[38], category: "Compétition"        },
+  { id: 3, title: "Recettes Secrètes II",   image: "/COOKING/i39.jpg", video: VIDEOS[39], category: "Gastronomie"        },
+  { id: 4, title: "Chef en Ville Saison 2", image: "/COOKING/i40.jpg", video: VIDEOS[40], category: "Cuisine Urbaine"    },
+  { id: 5, title: "Festin Sauvage II",      image: "/COOKING/i41.jpg", video: VIDEOS[41], category: "Nature & Cuisine"   },
 ];
-
-const Countdown = ({ daysLeft }: { daysLeft: number }) => {
-  const [time, setTime] = useState({ h: 23, m: 59, s: 59 });
-  useEffect(() => {
-    const t = setInterval(() => {
-      setTime((prev) => {
-        if (prev.s > 0) return { ...prev, s: prev.s - 1 };
-        if (prev.m > 0) return { ...prev, m: prev.m - 1, s: 59 };
-        if (prev.h > 0) return { h: prev.h - 1, m: 59, s: 59 };
-        return prev;
-      });
-    }, 1000);
-    return () => clearInterval(t);
-  }, []);
-
-  return (
-    <div className="flex items-center gap-1 text-xs font-mono">
-      <span className="px-1.5 py-0.5 bg-black/60 rounded text-white">{daysLeft}j</span>
-      <span className="px-1.5 py-0.5 bg-black/60 rounded text-white">{String(time.h).padStart(2, "0")}h</span>
-      <span className="px-1.5 py-0.5 bg-black/60 rounded text-white">{String(time.m).padStart(2, "0")}m</span>
-      <span className="px-1.5 py-0.5 bg-black/60 rounded text-red-400">{String(time.s).padStart(2, "0")}s</span>
-    </div>
-  );
-};
 
 export const ComingSoonSection = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -67,11 +43,7 @@ export const ComingSoonSection = () => {
                 </div>
               </VideoCard>
               <div className="p-3">
-                <h3 className="text-white font-cinematic text-sm mb-2">{movie.title}</h3>
-                <Countdown daysLeft={movie.daysLeft} />
-                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="mt-3 w-full flex items-center justify-center gap-2 py-2 bg-white/10 text-white text-xs font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-                  <Bell className="w-3 h-3" /> Me notifier
-                </motion.button>
+                <h3 className="text-white font-cinematic text-sm">{movie.title}</h3>
               </div>
             </motion.div>
           ))}

@@ -44,7 +44,6 @@ export const ContinueWatchingSection = () => {
                     <Play className="w-5 h-5 fill-black text-black ml-0.5" />
                   </div>
                 </div>
-                <span className="absolute top-2 left-2 px-2 py-0.5 bg-black/70 text-white text-xs rounded font-mono">{item.episode}</span>
               </VideoCard>
               <div className="h-1 bg-gray-700">
                 <motion.div className="h-full bg-red-500" initial={{ width: 0 }} whileInView={{ width: `${item.progress}%` }} viewport={{ once: true }} transition={{ duration: 1, delay: i * 0.1 }} />
