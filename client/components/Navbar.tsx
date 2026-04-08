@@ -6,7 +6,6 @@ import { Link, useLocation } from "react-router-dom";
 const NAV_ITEMS = [
   { label: "Accueil",       href: "/" },
   { label: "Tendances",     href: "#trending" },
-  { label: "Catégories",   href: "#categories" },
   { label: "Bientôt",      href: "#coming-soon" },
 ];
 
