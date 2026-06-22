@@ -54,5 +54,5 @@ fi
 
 echo ""
 echo "==> Deploy complete. Test locally on server:"
-echo "  curl -s http://127.0.0.1:3000/api/ping"
-echo "  curl -s \"http://127.0.0.1:3000/api/subscription/status?subid=0&msisdn=2250505763455&productcode=NIRV\""
+echo "  curl -s http://127.0.0.1:3015/api/ping"
+echo "  curl -s \"http://127.0.0.1:3015/api/subscription/status?subid=0&msisdn=2250505763455&productcode=NIRV\""

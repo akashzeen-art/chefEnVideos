@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Verify production server build has subscription routes
 set -euo pipefail
 
 APP_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD="$APP_DIR/dist/server/node-build.mjs"
+PORT="${PORT:-3015}"
 
 echo "==> Project: $APP_DIR"
+echo "==> Port: $PORT"
 echo "==> Git: $(git -C "$APP_DIR" log -1 --oneline 2>/dev/null || echo 'not a git repo')"
 
 if [ ! -f "$BUILD" ]; then
@@ -20,14 +21,23 @@ fi
 
 echo "OK: subscription routes found in build"
 
-if /usr/bin/curl -sf "http://127.0.0.1:3000/api/ping" >/dev/null 2>&1; then
+echo ""
+echo "==> Who is using port $PORT?"
+ss -tlnp | grep ":$PORT " || echo "(nothing on $PORT yet)"
+
+echo ""
+echo "==> PM2 chefenvideos"
+pm2 describe chefenvideos 2>/dev/null | grep -E "status|script path|exec cwd|PORT" || echo "chefenvideos not in pm2"
+
+if /usr/bin/curl -sf "http://127.0.0.1:${PORT}/api/ping" >/dev/null 2>&1; then
   echo ""
   echo "==> /api/ping"
-  /usr/bin/curl -s "http://127.0.0.1:3000/api/ping"
+  /usr/bin/curl -s "http://127.0.0.1:${PORT}/api/ping"
   echo ""
   echo "==> /api/subscription/status"
-  /usr/bin/curl -s "http://127.0.0.1:3000/api/subscription/status?subid=0&msisdn=2250505763455&productcode=NIRV"
+  /usr/bin/curl -s "http://127.0.0.1:${PORT}/api/subscription/status?subid=0&msisdn=2250505763455&productcode=NIRV"
   echo ""
 else
-  echo "WARN: Nothing listening on port 3000. Run: pm2 restart chefenvideos"
+  echo ""
+  echo "WARN: Nothing on port $PORT. Run: pm2 delete chefenvideos; pm2 start ecosystem.config.cjs"
 fi
