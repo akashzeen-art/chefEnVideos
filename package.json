@@ -19,10 +19,12 @@
     "test": "vitest --run",
     "test:subscription": "bash scripts/test-subscription-apis.sh",
     "test:subscription:live": "bash scripts/test-subscription-live.sh",
+    "deploy:ubuntu": "bash scripts/deploy-ubuntu.sh",
     "format.fix": "prettier --write .",
     "typecheck": "tsc"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "zod": "^3.25.76"
@@ -73,7 +75,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
