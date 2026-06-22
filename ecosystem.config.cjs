@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "chefenvideos",
       script: "dist/server/node-build.mjs",
-      cwd: __dirname + "/..",
+      cwd: __dirname,
       instances: 1,
       autorestart: true,
       watch: false,

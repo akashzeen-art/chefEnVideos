@@ -29,7 +29,7 @@ git pull origin main
 
 echo "==> Installing dependencies..."
 if command -v pnpm >/dev/null 2>&1; then
-  pnpm install --frozen-lockfile --force || pnpm install --force
+  pnpm install --no-frozen-lockfile
 else
   npm install
 fi
