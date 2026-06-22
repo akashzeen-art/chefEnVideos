@@ -4,6 +4,9 @@
 
 set -euo pipefail
 
+export CI=true
+export PNPM_SKIP_PROMPT=1
+
 APP_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$APP_DIR"
 
@@ -26,7 +29,7 @@ git pull origin main
 
 echo "==> Installing dependencies..."
 if command -v pnpm >/dev/null 2>&1; then
-  pnpm install --frozen-lockfile 2>/dev/null || pnpm install
+  pnpm install --frozen-lockfile --force || pnpm install --force
 else
   npm install
 fi
