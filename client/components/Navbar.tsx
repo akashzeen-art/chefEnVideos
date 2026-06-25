@@ -3,6 +3,7 @@ import { Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { BRAND_LOGO } from "@/lib/brand";
 
 const NAV_ITEMS = [
   { label: "Accueil",       href: "/" },
@@ -53,7 +54,7 @@ export const Navbar = () => {
 
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 group flex-shrink-0">
-              <img src="/image.png" alt="On Cook" className="h-12 md:h-14 w-auto object-contain group-hover:scale-105 transition-transform" />
+              <img src={BRAND_LOGO} alt="On Cook" className="h-12 md:h-14 w-auto object-contain group-hover:scale-105 transition-transform" />
             </Link>
 
             {/* Desktop nav links */}

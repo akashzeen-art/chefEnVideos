@@ -1,6 +1,7 @@
 import { Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BRAND_LOGO } from "@/lib/brand";
 
 interface LoadingSpinnerProps {
   onComplete?: () => void;
@@ -121,7 +122,7 @@ export const LoadingSpinner = ({ onComplete, duration = 8 }: LoadingSpinnerProps
 
             {/* Brand logo */}
             <div className="flex gap-[2px]">
-              <img src="/image.png" alt="On Cook" className="h-20 md:h-28 w-auto object-contain" />
+              <img src={BRAND_LOGO} alt="On Cook" className="h-20 md:h-28 w-auto object-contain" />
             </div>
 
             {/* Subtitle */}
