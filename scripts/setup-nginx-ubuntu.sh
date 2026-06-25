@@ -49,7 +49,7 @@ TITLE_HTTPS=$(curl -sk -H "Host: ${DOMAIN}" "https://127.0.0.1/" | grep -o '<tit
 echo "==> Page title HTTP:  ${TITLE_HTTP:-unknown}"
 echo "==> Page title HTTPS: ${TITLE_HTTPS:-unknown}"
 echo ""
-echo "Expected title: <title>Chef En Videos</title>"
+echo "Expected title: <title>M Recette Delicieuse</title>"
 echo ""
 echo "==> Do NOT run interactive certbot if cert already exists."
 echo "    This config uses the existing cert and proxies to port 3015 only."
