@@ -40,16 +40,16 @@ echo "==> Test HTTP:"
 curl -s -H "Host: ${DOMAIN}" "http://127.0.0.1/api/ping" || true
 echo ""
 
-echo "==> Test HTTPS:"
-curl -sk -H "Host: ${DOMAIN}" "https://127.0.0.1/api/ping" || true
+echo "==> Test HTTPS (via domain — SNI required):"
+curl -sk "https://${DOMAIN}/api/ping" || true
 echo ""
 
 TITLE_HTTP=$(curl -s -H "Host: ${DOMAIN}" "http://127.0.0.1/" | grep -o '<title>[^<]*</title>' | head -1 || true)
-TITLE_HTTPS=$(curl -sk -H "Host: ${DOMAIN}" "https://127.0.0.1/" | grep -o '<title>[^<]*</title>' | head -1 || true)
+TITLE_HTTPS=$(curl -sk "https://${DOMAIN}/" | grep -o '<title>[^<]*</title>' | head -1 || true)
 echo "==> Page title HTTP:  ${TITLE_HTTP:-unknown}"
 echo "==> Page title HTTPS: ${TITLE_HTTPS:-unknown}"
 echo ""
-echo "Expected title: <title>M Recette Delicieuse</title>"
+echo "Expected title: <title>Chef En Videos</title>"
 echo ""
 echo "==> Do NOT run interactive certbot if cert already exists."
 echo "    This config uses the existing cert and proxies to port 3015 only."

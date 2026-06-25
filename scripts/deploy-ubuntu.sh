@@ -25,6 +25,11 @@ if [ "$NODE_MAJOR" -lt 20 ]; then
   exit 1
 fi
 
+echo "==> Resetting local build output (dist is rebuilt on deploy)..."
+git checkout -- dist/ 2>/dev/null || true
+git clean -fd dist/ 2>/dev/null || true
+rm -rf dist
+
 echo "==> Pulling latest code..."
 git pull origin main
 
