@@ -26,7 +26,7 @@ echo "==> Who is using port $PORT?"
 ss -tlnp | grep ":$PORT " || echo "(nothing on $PORT yet)"
 
 echo ""
-echo "==> PM2 chefenvideos"
+echo "==> PM2 chefenvideos (this app only)"
 pm2 describe chefenvideos 2>/dev/null | grep -E "status|script path|exec cwd|PORT" || echo "chefenvideos not in pm2"
 
 if /usr/bin/curl -sf "http://127.0.0.1:${PORT}/api/ping" >/dev/null 2>&1; then
@@ -39,5 +39,5 @@ if /usr/bin/curl -sf "http://127.0.0.1:${PORT}/api/ping" >/dev/null 2>&1; then
   echo ""
 else
   echo ""
-  echo "WARN: Nothing on port $PORT. Run: pm2 delete chefenvideos; pm2 start ecosystem.config.cjs"
+  echo "WARN: Nothing on port $PORT. Run: pm2 startOrRestart ecosystem.config.cjs"
 fi

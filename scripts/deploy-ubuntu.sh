@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Deploy Chef En Videos on Ubuntu (Express + SPA + subscription APIs)
+# Deploy THIS project only (Chef N Videos CIV MTN / mrecettedelicieuse.com).
+# Only touches files in this folder and PM2 app "chefenvideos" on port 3015.
 # Usage on server: bash scripts/deploy-ubuntu.sh
 
 set -euo pipefail
@@ -56,3 +57,7 @@ echo ""
 echo "==> Deploy complete. Test locally on server:"
 echo "  curl -s http://127.0.0.1:3015/api/ping"
 echo "  curl -s \"http://127.0.0.1:3015/api/subscription/status?subid=0&msisdn=2250505763455&productcode=NIRV\""
+echo ""
+echo "==> After DNS points to this server, configure nginx:"
+echo "  sudo bash scripts/setup-nginx-ubuntu.sh"
+echo "  sudo certbot --nginx -d mrecettedelicieuse.com -d www.mrecettedelicieuse.com"

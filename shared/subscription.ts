@@ -1,3 +1,6 @@
+export const SITE_DOMAIN = "mrecettedelicieuse.com";
+export const SITE_URL = `https://${SITE_DOMAIN}`;
+
 /** NIRV product subscription configuration for CIV MTN */
 export const PRODUCT_CODE = "NIRV";
 
