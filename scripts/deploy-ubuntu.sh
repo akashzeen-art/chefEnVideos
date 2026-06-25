@@ -47,12 +47,23 @@ else
   npm run build
 fi
 
-echo "==> Restarting app with PM2..."
+echo "==> Restarting app with PM2 (this app only)..."
 if command -v pm2 >/dev/null 2>&1; then
-  pm2 startOrRestart ecosystem.config.cjs --update-env
+  pm2 delete chefenvideos 2>/dev/null || true
+  pm2 start ecosystem.config.cjs --update-env
   pm2 save
   echo "==> PM2 status:"
-  pm2 status chefenvideos
+  pm2 describe chefenvideos 2>/dev/null | grep -E "status|exec cwd|script path" || pm2 status chefenvideos
+
+  echo ""
+  echo "==> Verify logo file on disk vs HTTP:"
+  DISK_SIZE=$(stat -c%s "dist/spa/image.png" 2>/dev/null || stat -f%z "dist/spa/image.png")
+  HTTP_SIZE=$(curl -sI "http://127.0.0.1:3015/image.png" | grep -i content-length | awk '{print $2}' | tr -d '\r')
+  echo "  dist/spa/image.png bytes: ${DISK_SIZE}"
+  echo "  HTTP /image.png bytes:    ${HTTP_SIZE}"
+  if [ -n "$DISK_SIZE" ] && [ -n "$HTTP_SIZE" ] && [ "$DISK_SIZE" != "$HTTP_SIZE" ]; then
+    echo "  WARN: sizes differ — PM2 may be serving wrong folder. Check: pm2 describe chefenvideos"
+  fi
 else
   echo "WARN: PM2 not installed. Start manually:"
   echo "  PORT=3000 node dist/server/node-build.mjs"

@@ -7,7 +7,8 @@ const port = process.env.PORT || 3000;
 
 // In production, serve the built SPA files
 const __dirname = import.meta.dirname;
-const distPath = path.join(__dirname, "../spa");
+// Serve built SPA from project root (PM2 cwd), not __dirname — avoids stale/wrong path on shared servers
+const distPath = path.resolve(process.cwd(), "dist/spa");
 
 // Serve static files
 app.use(express.static(distPath));
